@@ -4,6 +4,8 @@ component extends=framework.one {
 
 	variables.framework = {
 		diLocations = "./model/services", // ColdFusion ORM handles Beans
+		generateSES=false,
+		SESOmitIndex=true,
 		decodeRequestBody = true,
 		preflightOptions=true, //this turns OPTIONS on, need to work on CORS
 		routes = new Routes().getRoutes()
