@@ -1,19 +1,21 @@
 {
     "name":"Demo",
     "web":{
-        "accessLogEnable":"true",
+        "accessLogEnable":true,
         "rewrites":{
-            "logEnable":"true",
-            "enable":"true",
+            "logEnable":true,
+            "enable":true,
             "configReloadSeconds":"30",
             "statusPath":"/tuckey-status"
         },
         "http":{
-            "port":"8070"
+            "port":"8070",
+            "enable":true
         },
         "webroot":"www"
     },
     "app":{
         "cfengine":"adobe@2018"
-    }
+		},
+		"cfconfigfile" : "cfconfig.json"
 }
