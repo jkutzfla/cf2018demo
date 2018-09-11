@@ -1,4 +1,5 @@
 {
+    "name":"Demo",
     "web":{
         "accessLogEnable":"true",
         "rewrites":{
@@ -11,5 +12,8 @@
             "port":"8070"
         },
         "webroot":"www"
+    },
+    "app":{
+        "cfengine":"adobe@2018"
     }
 }
