@@ -1,0 +1,15 @@
+{
+    "web":{
+        "accessLogEnable":"true",
+        "rewrites":{
+            "logEnable":"true",
+            "enable":"true",
+            "configReloadSeconds":"30",
+            "statusPath":"/tuckey-status"
+        },
+        "http":{
+            "port":"8070"
+        },
+        "webroot":"www"
+    }
+}
