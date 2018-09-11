@@ -5,6 +5,7 @@
         "rewrites":{
             "logEnable":true,
             "enable":true,
+            "config":"rewrites.xml",
             "configReloadSeconds":"30",
             "statusPath":"/tuckey-status"
         },
@@ -16,6 +17,6 @@
     },
     "app":{
         "cfengine":"adobe@2018"
-		},
-		"cfconfigfile" : "cfconfig.json"
+    },
+    "cfconfigfile":"cfconfig.json"
 }
