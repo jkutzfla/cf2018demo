@@ -19,6 +19,11 @@
     "applicationTimeout":"2,0,0,0",
     "CFaaSGeneratedFilesExpiryTime":30,
     "CFFormScriptDirectory":"",
+    "CFMappings":{
+        "/framework":{
+            "PHYSICAL":"C:\\BumbleDev\\presentation\\cf2018\\demo\\lib\\framework"
+        }
+    },
     "clientStorage":"Cookie",
     "clientStorageLocations":{
         "Cookie":{
