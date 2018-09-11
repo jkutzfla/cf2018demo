@@ -26,9 +26,13 @@
         }
     ],
     "contributors":[],
-    "dependencies":{},
+    "dependencies":{
+        "fw1":"^4.2.0"
+    },
     "devDependencies":{},
-    "installPaths":{},
+    "installPaths":{
+        "fw1":"lib/framework"
+    },
     "scripts":{},
     "ignore":[
         "**/.*",
