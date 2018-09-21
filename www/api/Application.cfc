@@ -2,6 +2,9 @@ component extends=framework.one {
 	this.name="Demo API";
 	this.sessionManagement = false;
 
+	//default is false.
+	this.serialization.preserveCaseForStructKey = true;
+
 	variables.framework = {
 		diLocations = "./model/services", // ColdFusion ORM handles Beans
 		generateSES=false,
@@ -18,12 +21,11 @@ component extends=framework.one {
 	this.ormsettings = {
 		dbCreate = "dropcreate",
 		sqlscript = getDirectoryFromPath(getCurrentTemplatePath()) & "../../sql/populateDB.sql",
-//		eventhandling= true,
-//		eventhandler="com.bumble.model.GlobalEventHandler",
+		eventhandling= true,
+		eventhandler="entity.GlobalEventHandler",
 		secondaryCacheEnabled = false,
 		logsql= false,
 		savemapping = false
-		// cfclocations=[getDirectoryFromPath(getCurrentTemplatePath()) & "model\beans", getDirectoryFromPath(getCurrentTemplatePath()) & "..\..\libraryroot\customtags\com\bumble\model"]
 	};
 
 	variables.framework.environments = {
@@ -49,5 +51,31 @@ component extends=framework.one {
 			ormReload();
 			location(url="/mvc/",addToken=false);
 		}
+
+		//do a basic CORS support
+		//if () {add header: Access-Control-Allow-Origin #host#}
+		if (ReFindNoCase("bumbleandbumble.com|bumbletraining.com", CGI.REMOTE_HOST)
+			|| getEnvironment() != "Production") {
+			var response = getPageContext().getResponse();
+			response.setHeader("Access-Control-Allow-Origin","*");
+		}
+
+		var rd = GetHttpRequestData();
+		if ( rd.keyExists("headers") && rd.headers.keyExists("X-Requested-With")) {
+			if (rd.headers["X-Requested-With"] == "XMLHttpRequest") {
+				request.layout = false;
+				request.customMethod = "XMLHttpRequest";
+				disableFrameworkTrace();
+			}
+		} else {
+			request.customMethod = "";
+		}
+
+		sleep(200);
+	}
+	public function onError( any exception, string event ) {
+		//writeLog(text="onError event=#event#, rc.action=#getFullyQualifiedAction('')#", file="FW1Error");
+		writeLog(text="#exception.stacktrace#", file="FW1Error");
+		super.onError(exception, event);
 	}
 }

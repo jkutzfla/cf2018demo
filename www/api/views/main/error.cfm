@@ -1,6 +1,6 @@
 <cfheader statuscode="500" statustext="Internal Server Error">
 <cfset errorFormat = "html">
-<cfif request.keyExists("customMethod") AND request.customMethod eq "ajax">
+<cfif request.keyExists("customMethod") AND request.customMethod eq "XMLHttpRequest">
 	<cfset errorFormat = "text">
 </cfif>
 <cfset rc.title = "Error">
@@ -11,3 +11,5 @@
 <cfdump var="#request.exception#" label="request.exception" format="#errorFormat#" top="2">
 
 <cfdump var="#rc#" label="rc" format="#errorFormat#" top="2">
+
+<cfset writeLog(text=request.exception.stacktrace, file="FW1Error")>
