@@ -1,0 +1,36 @@
+<div class="container" style="padding: 10px; line-height: 28px;">
+	<div class="col-md-8">
+			<div ng-if="$ctrl.cartlist.length == 0">No Carts Found</div>
+			<div ng-if="$ctrl.cartlist.length > 0">Carts found: {{$ctrl.cartlist.length}}</div>
+		</div>
+	<div class="col-md-4">
+		<div ng-if="$ctrl.isLoading"><loading></loading></div>
+	</div>
+</div>
+
+<div ng-if="$ctrl.cartlist.length > 0">
+	<!-- shoppingcart-list loops the carts and passes to the display component: -->
+	<ul>
+		<li ng-repeat="c in $ctrl.cartlist" style="display: block;">
+			<shoppingcart-display cart="c"></shoppingcart-display>
+			<button ng-click="$ctrl.select(c)">SELECT</button>
+			<button ng-click="$ctrl.delete(c)">DELETE</button>
+		</li>
+	</ul>
+</div>
+
+<div ng-if="$ctrl.cartSelected">
+	<shoppingcart-detail cart="$ctrl.cartSelected"></shoppingcart-detail>
+	<button ng-click="$ctrl.cartSelected = false">Close</button>
+	<!-- {{$ctrl.cartSelected | json}} -->
+</div>
+
+<!--{{$ctrl.cartlist | json}}-->
+<div>
+	<br>
+	<br>
+	<br>
+</div>
+<div class="col-md-6">
+<shoppingcart-create on-create="$ctrl.create(name)"></shoppingcart-create>
+</div>

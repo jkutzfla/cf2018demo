@@ -1,0 +1,31 @@
+<div ng-show="$ctrl.isLoading"><loading></loading></div>
+<div ng-show="!$ctrl.isLoading">
+<h3 style="margin-bottom: 0px;">Cart: {{$ctrl.cart.name}} (Id: {{$ctrl.cart.id}})</h3>
+<div>Total: {{$ctrl.getCartTotal() | currency}}</div>
+<!-- {{$ctrl.fullcart | json}} -->
+<div ng-if="!$ctrl.fullcart.items || $ctrl.fullcart.items.length == 0">
+	No items
+</div>
+<ul>
+	<li ng-repeat="i in $ctrl.fullcart.items">
+		{{i.productName}} {{i.quantity}} @ {{i.priceDollar | currency}} = {{i.quantity * i.priceDollar | currency}}
+	</li>
+</ul>
+<div ng-if="!$ctrl.displayAddItem">
+	<button ng-click="$ctrl.displayAddItem=true" class="btn btn-primary">Add Item</button>
+</div>
+
+<div ng-if="$ctrl.displayAddItem">
+	<form>
+		<div>Price: <input type="number" ng-model="$ctrl.newitem.price"></div>
+		<div>Quantity: <input type="number" ng-model="$ctrl.newitem.quantity" ></div>
+		<div>Total: <span>{{$ctrl.newitem.price * $ctrl.newitem.quantity | currency}}</span></div>
+		<div ng-show="!$ctrl.isAdding">
+			<input type="submit" class="btn btn-primary" ng-click="$ctrl.addItem()">
+			<button class="btn btn-default" ng-click="$ctrl.resetNewItem()">Cancel</button>
+		</div>
+		<div ng-show="$ctrl.isAdding"><loading></loading></div>
+	</form>
+</div>
+
+</div>

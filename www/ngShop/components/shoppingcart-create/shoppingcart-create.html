@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Create new cart:</h3>
+	</div>
+	
+	<div ng-if="$ctrl.isLoading"><loading></loading></div>
+
+<div ng-if="!$ctrl.isLoading" class="panel-body">
+	<input type="text" placeholder="Name your cart" ng-model="$ctrl.name">
+	<button 
+		ng-click="$ctrl.create()" 
+		ng-disabled="$ctrl.name == ''"
+		ng-class="{disabled: $ctrl.name == ''}">Create New Cart</button>
+</div>
+</div>
