@@ -1,10 +1,11 @@
 <div class="container" style="padding: 10px; line-height: 28px;">
 	<div class="col-md-8">
-			<div ng-if="$ctrl.cartlist.length == 0">No Carts Found</div>
-			<div ng-if="$ctrl.cartlist.length > 0">Carts found: {{$ctrl.cartlist.length}}</div>
+			<span ng-if="$ctrl.cartlist.length == 0">No Carts Found</span>
+			<span ng-if="$ctrl.cartlist.length > 0">Carts found: {{$ctrl.cartlist.length}}</span>
+			<span ng-if="$ctrl.isLoading"><loading></loading></span>
 		</div>
 	<div class="col-md-4">
-		<div ng-if="$ctrl.isLoading"><loading></loading></div>
+		
 	</div>
 </div>
 
@@ -21,6 +22,7 @@
 
 <div ng-if="$ctrl.cartSelected">
 	<shoppingcart-detail cart="$ctrl.cartSelected"></shoppingcart-detail>
+	<cartitem-edit cart="$ctrl.cartSelected" on-add-item="$ctrl.addItem(item)"></cartitem-edit>
 	<button ng-click="$ctrl.cartSelected = false">Close</button>
 	<!-- {{$ctrl.cartSelected | json}} -->
 </div>

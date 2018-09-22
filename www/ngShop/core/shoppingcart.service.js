@@ -26,6 +26,12 @@ angular.module('app').factory('Shoppingcart', ['$http', function($http) {
 			return $http.get(url).then(function (response) {
 				var cart = response.data.cart;
 				service.cart = cart;
+				// check the list and update
+				console.log('in get, cartlist=', service.cartlist, 'cart=', cart);
+				service.cartlist = service.cartlist.filter(function (c) {
+					return c.id != cart.id;
+				});
+				service.cartlist.push(cart);
 			});
 		},
 
@@ -51,7 +57,7 @@ angular.module('app').factory('Shoppingcart', ['$http', function($http) {
 				service.cart.items.push(response.data.item);
 			}) */
 		},
-
+		//this should go elsewhere.
 		newEmptyItem: function() {
 			return {quantity: 0, price: 0, productName: '', productId: 0 };
 		}

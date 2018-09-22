@@ -4,7 +4,7 @@ angular.module('app').component('shoppingcartList', {
 	bindings: {},
 	templateUrl: 'containers/shoppingcart-list/shoppingcart-list.html',
 	//in shoppingcart-list.component.js:
-	controller: ['Shoppingcart', function(Shoppingcart) {
+	controller: ['Shoppingcart', 'Product', function(Shoppingcart, Product) {
 		this.cartlist = [];
 		this.cartSelected;
 
@@ -14,7 +14,9 @@ angular.module('app').component('shoppingcartList', {
 			//Shoppingcart was injected
 			Shoppingcart.getList().then( function() {
 				self.cartlist = Shoppingcart.cartlist;
-				self.isLoading = false;
+				Product.getList().then(function() {
+					self.isLoading = false;
+				});
 			});
 		}
 
@@ -43,6 +45,18 @@ angular.module('app').component('shoppingcartList', {
 			var self = this;
 			Shoppingcart.delete(cart.id).then( function() {
 				self.cartlist = Shoppingcart.cartlist;
+				self.isLoading = false;
+			});
+		}
+
+		this.addItem = function(item) {
+			this.isLoading = true;
+			var self = this;
+			console.log('addItem in shoppingcart-list container');
+			return Shoppingcart.addItem(this.cartSelected.id, item).then(function() {
+				self.cartlist = Shoppingcart.cartlist;
+				self.cartSelected = null;
+				self.cartSelected = Shoppingcart.cart;
 				self.isLoading = false;
 			});
 		}

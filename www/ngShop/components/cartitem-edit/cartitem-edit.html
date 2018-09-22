@@ -1,0 +1,14 @@
+cartitem-edit.html
+<br>Working total: {{$ctrl.getCartTotal() | currency}}
+
+<form>
+	<select ng-model="$ctrl.item.productId" ng-change="$ctrl.populateProduct()">
+		<option ng-repeat="p in $ctrl.productlist" value="{{p.id}}">{{p.name}} {{p.priceDollar | currency}}</option>
+	</select>
+		
+	<input type="number" placeholder="Quantity" ng-model="$ctrl.item.quantity">
+	<input type="number" placeholder="Price" ng-model="$ctrl.item.price">
+</form>
+
+
+<div><button class="btn btn-large" ng-click="$ctrl.addItem()">addItem()</button></div>
