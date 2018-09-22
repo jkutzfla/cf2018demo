@@ -25,6 +25,7 @@ angular.module('app').component('shoppingcartList', {
 			this.isLoading = true;
 			var self = this;
 			return Shoppingcart.create(name).then( function() {
+				self.cartlist = Shoppingcart.cartlist;
 				self.isLoading = false;
 			});
 		}
