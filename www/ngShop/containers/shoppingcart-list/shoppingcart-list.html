@@ -12,10 +12,18 @@
 <div ng-if="$ctrl.cartlist.length > 0">
 	<!-- shoppingcart-list loops the carts and passes to the display component: -->
 	<ul>
+		<li style="display: block";>
+			<span style="display: table-cell; width: 5em;">Id</span>
+			<span style="display: table-cell; width: 15em;">Name</span>
+			<span style="display: table-cell; width: 5em;">Total</span>
+			<span style="display: table-cell; width: 10em;"></span>
+		</li>
 		<li ng-repeat="c in $ctrl.cartlist" style="display: block;">
 			<shoppingcart-display cart="c"></shoppingcart-display>
+			<span>
 			<button ng-click="$ctrl.select(c)">SELECT</button>
 			<button ng-click="$ctrl.delete(c)">DELETE</button>
+			</span>
 		</li>
 	</ul>
 </div>

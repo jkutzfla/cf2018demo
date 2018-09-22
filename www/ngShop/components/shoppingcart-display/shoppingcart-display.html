@@ -1,4 +1,5 @@
 <!-- inside shoppingcart-display.html -->
-<span style="display: inline-block; width: 20em;">Id: {{$ctrl.cart.id}} - name: {{$ctrl.cart.name}}</span>
-<span>{{$ctrl.cart.totalDollar | currency}}</span>
-
+<span style="display: table-cell; width: 5em;">{{$ctrl.cart.id}}</span>
+<span style="display: table-cell; width: 15em">{{$ctrl.cart.name}}</span>
+<!-- not in the cartlist data <span style="display: table-cell;">{{$ctrl.cart.items.length}}</span> -->
+<span style="display: table-cell; width: 5em;">{{$ctrl.cart.totalDollar | currency}}</span>
