@@ -1,0 +1,15 @@
+
+<div>Choose brand:
+	<ul>
+		<li ng-repeat="i in $ctrl.items">
+			<label>
+				<input type="radio" ng-model="$ctrl.item" ng-value="{{i.price}}" >
+				{{i.name}} ({{i.price | currency}}) </label>
+		</li>
+	</ul>
+</div>
+
+<div>Enter your quantity:
+	<input type="number" ng-model="$ctrl.quantity" increment="1">
+	<span>Cost: {{$ctrl.getCost() | currency }}</span>
+</div>

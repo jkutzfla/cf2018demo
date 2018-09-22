@@ -1,0 +1,30 @@
+
+<html>
+	<head>
+		  <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+  <script src="//code.angularjs.org/snapshot/angular-animate.js"></script>
+
+<script>
+	angular.module('ngAnimateSwapExample', ['ngAnimate'])
+.controller('AppCtrl', ['$scope', '$interval', function($scope, $interval) {
+  $scope.number = 0;
+  $interval(function() {
+    $scope.number++;
+  }, 1000);
+
+  var colors = ['red','blue','green','yellow','orange'];
+  $scope.colorClass = function(number) {
+    return colors[number % colors.length];
+  };
+}]);
+	</script>
+	<link rel="stylesheet" href="swap_animate.css">
+	</head>
+	<body ng-app="ngAnimateSwapExample">
+			<div class="container" ng-controller="AppCtrl">
+					<div ng-animate-swap="number" class="cell swap-animation" ng-class="colorClass(number)">
+						{{ number }}
+					</div>
+				</div>
+	</body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+<title>parentaccount.edit | Bb.RM</title>
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<!--<script src="assets/app/bower_components/angular/angular.js"></script>
+<script src="assets/js/polyfill.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+
+
+<style>
+	.button {
+		// border: 1px solid black;
+		padding: 2px;
+		border-radius: 5px;
+		// background-color: #ddd;
+	}
+	
+	.tablerow {padding: 5px; display: table; vertical-align:: top;}
+	
+	.row2 {display: table;}
+	.cell2 {display: table-cell; vertical-align:top;}
+	
+	.rowEven {background-color: #f3f3dd;}
+	
+	.cell {
+		display: table-cell;
+	}
+	.chars-2 {
+		width: 2em;
+	}
+	.chars-3 {
+		width: 3em;
+	}
+	.chars-4 {
+		width: 4em;
+	}
+	.chars-5 {
+		width: 5em;
+	}
+	.chars-6 {
+		width: 6em;
+	}
+	.chars-8 {
+		width: 8em;
+	}
+	.chars-10 {
+		width: 10em;
+	}
+	
+	.heading {font-weight: bold;}
+	
+	.statusBad {
+		color: red;
+	}
+	.statusGood {
+		color: green;
+	}
+	
+	.rowStripe {
+		background-color: #ddd;
+	}
+</style>	
+	
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/bbrmMVC/">Home</a>
+		</div>
+		<div class="navbar-header">
+		<ul class="nav navbar-nav">
+        <li><a href="/" class="">Bb.RM Main</a></li>
+        </ul>
+		</div>
+	</div>
+</nav>
+
+	<div class="container">
+	<script>
+	
+var defaultSettings = [
+	{'key': 'keepPointsSeparate', 'value': false},
+	{'key': 'onlyUseMasterPoints', 'value': false},
+	{'key': 'useHighestLocation', 'value':false},
+	{'key': 'allowSweep', 'value': false}
+];
+
+angular.module('parent', []);
+
+angular.module('parent').component('editSettings', {
+	bindings: {
+		textIn: '<'
+	},
+	template: '<table class=table style="width:auto;"><tr ng-repeat="s in $ctrl.settings"><td>{{s.key}}</td><td><label><input type="radio" ng-model="s.value" ng-value="true">True</label> <label><input type="radio" ng-model="s.value" ng-value="false">False</label></td></tr></table><input type="hidden" name="settings" value="{{$ctrl.settings |json}}">',
+	controller: function() {
+		this.settings = {};
+		
+		this.$onInit = function() {
+			console.log('onInit in editSettings component.', this.textIn);
+
+			if (!this.textIn || this.textIn === "") {
+				this.settings = defaultSettings;
+			} else {
+				this.settings = angular.extend(defaultSettings, this.textIn); //polyfill Object.assigns
+			}
+		}
+	}	
+});
+
+</script>
+
+
+	<h2>PARENTCODE</h2>
+<form method="POST" action="/bbrmMVC/?action=parentaccount.update&id=1">
+
+<div>Master Account: <input type="text" name="masterAccountSAP" value=""></div>
+
+<div>Num Doors: <input type="number" name="numDoors" value="0"></div>
+
+<div ng-app="parent">Settings:
+
+<edit-settings text-in='[
+  {
+    "key": "keepPointsSeparate",
+    "value": true
+  },
+  {
+    "key": "onlyUseMasterPoints",
+    "value": false
+  },
+  {
+    "key": "useHighestLocation",
+    "value": false
+  },
+  {
+    "key": "allowSweep",
+    "value": true
+  }
+]'></edit-settings>
+	
+</div>
+
+<div></div>
+
+<input type="submit" class="btn btn-primary">
+| <a href="/bbrmMVC/?action=parentaccount.default&code=PARENTCODE" class="btn btn-default">Cancel</a>
+
+</form>
+
+	</div>
+
+
+</body>
+</html>
