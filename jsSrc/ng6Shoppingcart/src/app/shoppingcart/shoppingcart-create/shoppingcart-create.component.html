@@ -1,0 +1,14 @@
+<div class="card panel-default">
+	<div class="card-header">
+		<h3>Create new cart:</h3>
+	</div>
+
+	<div *ngIf="isLoading">Loading...</div>
+
+<div *ngIf="!isLoading" class="card-body">
+	<input type="text" placeholder="Name your cart" [(ngModel)]="newCart.name">
+	<button (click)="create()" class="btn btn-primary"
+		[disabled]="newCart.name == ''"
+		[ngClass]="{disabled: newCart.name == ''}">Create New Cart</button>
+</div>
+</div>
