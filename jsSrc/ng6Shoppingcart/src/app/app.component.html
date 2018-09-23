@@ -1,3 +1,40 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+	<a routerLink="/" routerLinkActive="active" class="navbar-brand">Home</a>
+	<button class="navbar-toggler" type="button"><span class="navbar-toggler-icon"></span></button>
+
+	<div class="collapse navbar-collapse">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link" routerLink="/cart" routerLinkActive="active">Cart</a></li>
+			<li class="nav-item"><a class="nav-link" routerLink="/appstatus" routerLinkActive="active">Status</a></li>
+		</ul>
+		<span class="navbar-text  form-inline">
+			Navbar text with an inline element
+		</span>
+	</div>
+</nav>
+<div class="container">
+	<div class="row">
+		<div class="col-sm">
+			One of three columns
+		</div>
+		<div class="col-sm">
+			One of three columns
+		</div>
+		<div class="col-sm">
+			One of three columns
+		</div>
+	</div>
+</div>
+
+<div class="container">
+  <div class="row">
+  <div class="col">One</div>
+  <div class="col">Two</div>
+  <div class="col">Three</div>
+  </div>
+</div>
+
+
 <div class="container">
 	<router-outlet></router-outlet>
 </div>

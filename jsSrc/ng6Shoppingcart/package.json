@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.config.json --progress --open",
     "build": "ng build",
+    "build-prod": "ng build --prod",
+    "build-dev": "ng build -dev --base-href /mvc/assets/dist/prodcat/prodcat.htm",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -21,7 +23,7 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "core-js": "^2.5.4",
-    "rxjs": "~6.2.0",
+    "rxjs": "^6.2.2",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

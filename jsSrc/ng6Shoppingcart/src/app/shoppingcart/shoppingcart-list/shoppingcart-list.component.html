@@ -1,5 +1,24 @@
+<button (click)="testAddCart()">testAddCart()</button>
+<div>Number of carts: {{cartList.length}}</div>
+<div>isLoading: {{isLoading}}</div>
+<ul *ngIf="cartList.length > 0">
+	<li *ngFor="let cart of cartList">
+		<app-shoppingcart-display [cart]="cart" [cartname]="cart.name"></app-shoppingcart-display>
+		{{cart.name}}
+		({{cart.id}})
+	</li>
+</ul>
+
 <p>
   shoppingcart-list works!
 </p>
 now call the display:
-<app-shoppingcart-display></app-shoppingcart-display>
+
+{{ cartList | json}}
+
+<!--- <app-shoppingcart-detail></app-shoppingcart-detail> --->
+
+
+<app-shoppingcart-create (added)="onCreateCart($event)">
+
+</app-shoppingcart-create>
