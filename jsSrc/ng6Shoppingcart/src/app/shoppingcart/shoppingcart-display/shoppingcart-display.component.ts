@@ -16,7 +16,7 @@ export class ShoppingcartDisplayComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-		console.log('in sc-display onChanges, ', changes);
+		// console.log('in sc-display onChanges, ', changes);
 	}
 
 }

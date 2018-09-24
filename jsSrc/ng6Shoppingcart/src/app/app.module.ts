@@ -6,6 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { ShoppingcartModule } from './shoppingcart/shoppingcart.module';
 import { CoreModule } from './core/core.module';
 
+import { HttpErrorHandler } from './http-error-handler.service';
+import { MessageService } from './message.service';
+
+
 @NgModule({
 	declarations: [
 		AppComponent
@@ -16,7 +20,10 @@ import { CoreModule } from './core/core.module';
 		ShoppingcartModule,
 		CoreModule
 	],
-	providers: [],
+	providers: [
+		HttpErrorHandler,
+		MessageService
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

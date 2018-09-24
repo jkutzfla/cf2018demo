@@ -1,60 +1,63 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { tap, map, catchError } from 'rxjs/operators';
 
 import { Shoppingcart } from './shoppingcart.interface';
 
+import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
+
+const httpOptions = {headers: new HttpHeaders({'Content-Type':  'application/json'  })};
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ShoppingcartService {
 	private apiUrl = '/api/cart';
+	private handleError: HandleError;
+
 	cartList: Shoppingcart[];
 	cart: Shoppingcart;
 
-	constructor(private http: HttpClient) { }
+	constructor(
+		private http: HttpClient,
+		httpErrorHandler: HttpErrorHandler) {
+		this.handleError = httpErrorHandler.createHandleError('ShoppingcartService');
+		}
 
 	getCartlist(): Observable<Shoppingcart[]> {
 		const apiUrl = '/api/cart/list';
-		return this.http.get<any>(apiUrl)
+		return this.http.get<Shoppingcart[]>(apiUrl)
 			.pipe(
-				tap( cartlist => this.cartList = cartlist as Shoppingcart[])
+				// catchError(this.handleError('getCartlist()', []))
+				tap( cartList => this.cartList = cartList as Shoppingcart[])
 			);
 	}
 
-	getCachedCartlist(): Observable<Shoppingcart[]> {
-		if (this.cartList) {
-			return of(this.cartList);
-		} else {
+	getCartlistCached(): Observable<Shoppingcart[]> {
+		if (!this.cartList) {
 			return this.getCartlist();
+		} else {
+			return of(this.cartList);
 		}
 	}
 
-	createCart(newCart: Shoppingcart): Promise<Shoppingcart> {
+	createCart(newCart: Shoppingcart): Observable<Shoppingcart> {
 		const apiUrl = '/api/cart';
-		// const httpOptionsNew = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 		const payload = {cart: newCart};
-		return this.http.post<Shoppingcart>(apiUrl, payload).toPromise();
-			//.pipe(
-			//	catchError( function() {console.log('Error ', newCart)})
-			//);
-/*			.pipe(
-				tap(response => {
-					console.log('in service createCart', response);
-					// this.cartList.push( response as Shoppingcart);
-				}),
-				map(response => response as Shoppingcart),
-				// tap(sc => this.cartList.push(sc)),
-				tap(sc => console.log('end of service createCart', sc))
-			); */
+		return this.http.post<any>(apiUrl, payload, httpOptions)
+			.pipe(
+				map(response => response.cart), // the response has a root cart key.
+				tap(sc => this.cartList.push(sc)),
+				catchError( this.handleError('createCart', newCart) )
+			);
 	}
 
-	getCart(): Observable<Shoppingcart> {
-		return this.http.get<Shoppingcart>(this.apiUrl)
+	getCart(cartid: Number): Observable<Shoppingcart> {
+		return this.http.get<any>(this.apiUrl + '/' + cartid)
 			.pipe(
+				map(response => response.cart),
 				tap(
 					(cart) => {
 						if (!cart.items) {

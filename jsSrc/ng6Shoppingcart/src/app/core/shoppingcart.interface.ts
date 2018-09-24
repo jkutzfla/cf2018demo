@@ -1,9 +1,9 @@
 export interface Shoppingcart {
 	id: number;
 	name: String;
-	totalDollar: number;
+	totalDollar?: number;
 	totalPoint?: number;
-	items: ShoppingcartItem[];
+	items?: ShoppingcartItem[];
 }
 
 export interface ShoppingcartItem {

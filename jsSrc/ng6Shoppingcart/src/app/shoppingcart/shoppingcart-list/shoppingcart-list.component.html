@@ -1,24 +1,38 @@
-<button (click)="testAddCart()">testAddCart()</button>
-<div>Number of carts: {{cartList.length}}</div>
-<div>isLoading: {{isLoading}}</div>
-<ul *ngIf="cartList.length > 0">
-	<li *ngFor="let cart of cartList">
-		<app-shoppingcart-display [cart]="cart" [cartname]="cart.name"></app-shoppingcart-display>
-		{{cart.name}}
-		({{cart.id}})
-	</li>
-</ul>
+<div class="row" style="padding: 10px; line-height: 28px;">
+	<div class="col-8">
+		<span *ngIf="cartList.length == 0">No Carts Found</span>
+		<span *ngIf="cartList.length > 0">Carts found: {{cartList.length}}</span>
+		<span *ngIf="isLoading">Loading...</span>
+	</div>
+	<div class="col-4"></div>
+</div>
 
-<p>
-  shoppingcart-list works!
-</p>
-now call the display:
+<div *ngIf="cartList.length > 0">
+	<ul style="margin: 0px;">
+		<li style="display: block;">
+			<span style="display: table-cell; width: 5em;">Id</span>
+			<span style="display: table-cell; width: 15em;">Name</span>
+			<span style="display: table-cell; width: 5em;">Total</span>
+			<span style="display: table-cell; width: 10em;"></span>
+		</li>
+		<li *ngFor="let cart of cartList"
+			style="display: block; padding: 5px;"
+			[ngClass]="{rowSelected: cartSelected && cart.id == cartSelected.id}">
+			<app-shoppingcart-display [cart]="cart" [cartname]="cart.name"></app-shoppingcart-display>
+			<span>
+					<button (click)="select(cart)" class="btn btn-primary">SELECT</button>
+					<button (click)="delete(cart)" class="btn btn-danger">DELETE</button>
+					</span>
+		</li>
+	</ul>
+</div>
 
-{{ cartList | json}}
+<div *ngIf="cartSelected">
+	{{ cartSelected | json}}
+		<!-- <shoppingcart-detail cart="$ctrl.cartSelected"></shoppingcart-detail>
+		<cartitem-edit cart="$ctrl.cartSelected" on-add-item="$ctrl.addItem(item)"></cartitem-edit>
+		<button ng-click="$ctrl.cartSelected = false" class="btn btn-default">Close</button>
+		{{$ctrl.cartSelected | json}} -->
+</div>
 
-<!--- <app-shoppingcart-detail></app-shoppingcart-detail> --->
-
-
-<app-shoppingcart-create (added)="onCreateCart($event)">
-
-</app-shoppingcart-create>
+<app-shoppingcart-create (added)="onCreateCart($event)"></app-shoppingcart-create>
