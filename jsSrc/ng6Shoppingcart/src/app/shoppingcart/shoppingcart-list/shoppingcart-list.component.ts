@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../core/product.service';
 import { Product } from '../../core/product.interface';
 import { ShoppingcartService } from '../../core/shoppingcart.service';
-import { Shoppingcart } from '../../core/shoppingcart.interface';
+import { Shoppingcart, ShoppingcartItem } from '../../core/shoppingcart.interface';
 
 @Component({
 	selector: 'app-shoppingcart-list',
@@ -54,11 +54,37 @@ export class ShoppingcartListComponent implements OnInit {
 		console.log('In sc-list, createCart()', newCart);
 		// const newCart: Shoppingcart = { id, name } as Shoppingcart;
 		this.shoppingCartService.createCart(newCart)
-			.subscribe( cart => console.log('saved new cart', cart));
+			.subscribe( cart => {
+				console.log('saved new cart', cart);
+				this.isLoading = false;
+			});
 	}
 
 	delete(cart: Shoppingcart) {
+		this.isLoading = true;
+		this.shoppingCartService.deleteCart(cart.id)
+			.subscribe( () => {
+				this.getCarts();
+				this.isLoading = false;
+			});
+	}
 
+	addCartitem(cartitem: ShoppingcartItem) {
+		console.log('addCartitem() in sc-list.component');
+		this.isLoading = true;
+		this.shoppingCartService.addCartitem(this.cartSelected.id, cartitem)
+			.subscribe((cart) => {
+				this.cartSelected = null;
+				this.cartSelected = cart;
+				console.log('in the subscribe in addCartitem of sc-list');
+				this.getCarts();
+				// do we need to update this? this.cartSelected;
+				this.isLoading = false;
+			});
+	}
+
+	getEmptyCartitem(): ShoppingcartItem {
+		return {} as ShoppingcartItem;
 	}
 }
 

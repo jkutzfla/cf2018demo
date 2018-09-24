@@ -27,12 +27,16 @@
 	</ul>
 </div>
 
-<div *ngIf="cartSelected">
-	{{ cartSelected | json}}
-		<!-- <shoppingcart-detail cart="$ctrl.cartSelected"></shoppingcart-detail>
-		<cartitem-edit cart="$ctrl.cartSelected" on-add-item="$ctrl.addItem(item)"></cartitem-edit>
-		<button ng-click="$ctrl.cartSelected = false" class="btn btn-default">Close</button>
-		{{$ctrl.cartSelected | json}} -->
+<div *ngIf="cartSelected" style="padding: 10px;">
+	<app-shoppingcart-detail [cart]="cartSelected"></app-shoppingcart-detail>
+	<!-- edit form used to create new item: -->
+	<div style="padding: 10px;">
+	Add an item:
+	<app-cartitem-edit [cart]="cartSelected"  (saveItem)="addCartitem($event)"></app-cartitem-edit>
+	</div>
+	<div><button (click)="cartSelected = null" class="btn btn-default">Close {{cartSelected.name}} cart</button></div>
 </div>
 
+<div style="padding-top: 20px;">
 <app-shoppingcart-create (added)="onCreateCart($event)"></app-shoppingcart-create>
+</div>

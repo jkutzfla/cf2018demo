@@ -1,0 +1,10 @@
+<div>
+	<h3 style="margin-bottom: 0px;">Cart: {{cart.name}} ({{cart.id}})</h3>
+	<div *ngIf="!cart.items || cart.items.length == 0">No items</div>
+	<ul>
+		<li *ngFor="let i of cart.items">
+			{{i.productName}} {{i.quantity}} @ {{i.priceDollar | currency}} = {{i.quantity * i.priceDollar | currency}}
+		</li>
+	</ul>
+	<div>Cart total: {{cart.totalDollar | currency}}</div>
+</div>
