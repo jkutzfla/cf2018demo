@@ -1,14 +1,12 @@
 <div style="padding: 10px;" *ngIf="!isLoading">
+	<div>New total = {{cart.totalDollar | currency}} + {{cartitem.quantity * cartitem.priceDollar | currency}}
+			= {{cart.totalDollar + (cartitem.quantity * cartitem.priceDollar) | currency}}
+	</div>
 
 	<select [(ngModel)]="cartitem.productId" (change)="populateProduct()" name="productId">
 		<option *ngFor="let p of productList" value="{{p.id}}">{{p.name}} {{p.priceDollar | currency}}</option>
 	</select>
 	<input type="number" placeholder="Quantity" [(ngModel)]="cartitem.quantity" name="quantity">
-	<br>
-	<span>
-		New total = {{cart.totalDollar | currency}} + {{cartitem.quantity * cartitem.priceDollar | currency}}
-		= {{cart.totalDollar + (cartitem.quantity * cartitem.priceDollar) | currency}}
-	</span>
 
 	<button (click)="save()" class="btn btn-primary">SAVE</button>
 

@@ -15,7 +15,7 @@
 			<span style="display: table-cell; width: 5em;">Total</span>
 			<span style="display: table-cell; width: 10em;"></span>
 		</li>
-		<li *ngFor="let cart of cartList"
+		<li *ngFor="let cart of cartlistOrdered()"
 			style="display: block; padding: 5px;"
 			[ngClass]="{rowSelected: cartSelected && cart.id == cartSelected.id}">
 			<app-shoppingcart-display [cart]="cart" [cartname]="cart.name"></app-shoppingcart-display>
@@ -38,5 +38,5 @@
 </div>
 
 <div style="padding-top: 20px;">
-<app-shoppingcart-create (added)="onCreateCart($event)"></app-shoppingcart-create>
+<app-shoppingcart-create (add)="onCreateCart($event)"></app-shoppingcart-create>
 </div>

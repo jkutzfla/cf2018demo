@@ -12,7 +12,7 @@ export class ShoppingcartDisplayComponent implements OnInit, OnChanges {
 	constructor() { }
 
 	ngOnInit() {
-		console.log('in sc-display onInit, ', this.cart);
+		// console.log('in sc-display onInit, ', this.cart);
 	}
 
 	ngOnChanges(changes: {[propKey: string]: SimpleChange}) {

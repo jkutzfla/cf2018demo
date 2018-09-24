@@ -3,6 +3,7 @@ import { ProductService } from '../../core/product.service';
 import { Product } from '../../core/product.interface';
 import { ShoppingcartService } from '../../core/shoppingcart.service';
 import { Shoppingcart, ShoppingcartItem } from '../../core/shoppingcart.interface';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-shoppingcart-list',
@@ -25,8 +26,15 @@ export class ShoppingcartListComponent implements OnInit {
 		this.getCarts();
 	}
 
+	cartlistOrdered(): Shoppingcart[] {
+		const sorted =  this.cartList.sort( function (a, b) {
+			return a.id - b.id;
+		});
+		return sorted;
+	}
+
 	getCarts(): void {
-		this.shoppingCartService.getCartlistCached()
+		this.shoppingCartService.getCartlist()
 			.subscribe(carts => {
 				this.cartList = carts;
 				this.isLoading = false;
@@ -45,6 +53,8 @@ export class ShoppingcartListComponent implements OnInit {
 		this.shoppingCartService.getCart(cart.id)
 			.subscribe( fullcart => {
 				this.cartSelected = fullcart;
+				this.cartList = this.cartList.filter( c => c.id !== cart.id);
+				this.cartList.push(fullcart);
 				this.isLoading = false;
 			});
 	}
@@ -56,6 +66,7 @@ export class ShoppingcartListComponent implements OnInit {
 		this.shoppingCartService.createCart(newCart)
 			.subscribe( cart => {
 				console.log('saved new cart', cart);
+				this.cartList.push(cart);
 				this.isLoading = false;
 			});
 	}
@@ -64,7 +75,7 @@ export class ShoppingcartListComponent implements OnInit {
 		this.isLoading = true;
 		this.shoppingCartService.deleteCart(cart.id)
 			.subscribe( () => {
-				this.getCarts();
+				this.cartList = this.cartList.filter(c => c.id !== cart.id);
 				this.isLoading = false;
 			});
 	}
@@ -72,14 +83,12 @@ export class ShoppingcartListComponent implements OnInit {
 	addCartitem(cartitem: ShoppingcartItem) {
 		console.log('addCartitem() in sc-list.component');
 		this.isLoading = true;
-		this.shoppingCartService.addCartitem(this.cartSelected.id, cartitem)
+		const cartid = this.cartSelected.id;
+		this.cartSelected = null;
+		return this.shoppingCartService.addCartitem(cartid, cartitem)
 			.subscribe((cart) => {
-				this.cartSelected = null;
 				this.cartSelected = cart;
-				console.log('in the subscribe in addCartitem of sc-list');
 				this.getCarts();
-				// do we need to update this? this.cartSelected;
-				this.isLoading = false;
 			});
 	}
 

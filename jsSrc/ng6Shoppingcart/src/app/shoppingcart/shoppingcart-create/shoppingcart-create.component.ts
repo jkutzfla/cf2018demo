@@ -7,7 +7,7 @@ import { Shoppingcart } from '../../core/shoppingcart.interface';
 	styleUrls: ['./shoppingcart-create.component.css']
 })
 export class ShoppingcartCreateComponent implements OnInit {
-	@Output() added = new EventEmitter<Shoppingcart>();
+	@Output() add = new EventEmitter<Shoppingcart>();
 	isLoading = false;
 	newCart: Shoppingcart;
 	constructor() { }
@@ -20,7 +20,7 @@ export class ShoppingcartCreateComponent implements OnInit {
 		console.log('in sc-create create()');
 		this.isLoading = true;
 
-		this.added.emit(this.newCart);
+		this.add.emit(this.newCart);
 		this.newCart = this.newCartObject();
 		this.isLoading = false;
 	}

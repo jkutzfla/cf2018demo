@@ -30,17 +30,18 @@ export class CartitemEditComponent implements OnInit {
 	}
 
 	populateProduct() {
-		console.log('populateProduct()', this.cartitem);
+		// console.log('populateProduct()', this.cartitem);
 		if (this.cartitem.productId && this.cartitem.productId > 0) {
 			const pid = this.cartitem.productId;
 			const product = this.productList.find( function(p) {
-				console.log('About to check the p', p, 'to match given id: ', pid);
+				// console.log('About to check the p', p, 'to match given id: ', pid);
+				// this compare must not use the triple equals:
 				return p.id == pid;
 			});
-			console.log('found: ', product);
+			// console.log('found: ', product);
 			this.cartitem.productName = product.name;
 			this.cartitem.priceDollar = product.priceDollar;
-			console.log(this.cartitem);
+			// console.log(this.cartitem);
 		} else {
 			this.cartitem.priceDollar = 0;
 			this.cartitem.productName = '';
@@ -54,5 +55,4 @@ export class CartitemEditComponent implements OnInit {
 		this.cartitem = {} as ShoppingcartItem;
 		this.isLoading = false;
 	}
-
 }
