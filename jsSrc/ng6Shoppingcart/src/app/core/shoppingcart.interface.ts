@@ -14,9 +14,9 @@ export interface ShoppingcartItem {
 	quantity: number;
 	priceDollar: number;
 	pricePoint?: number;
-	productName: string;
+	productName?: string;
 	productId?: number;
-	dateCreated: Date;
-	dateModified: Date;
+	dateCreated?: Date;
+	dateModified?: Date;
 	totalDollar: number;
 }

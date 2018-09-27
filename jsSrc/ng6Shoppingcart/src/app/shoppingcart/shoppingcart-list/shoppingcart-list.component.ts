@@ -52,6 +52,7 @@ export class ShoppingcartListComponent implements OnInit {
 	isLoading: boolean;
 	cartList: Shoppingcart[];
 	cartSelected: Shoppingcart;
+	emptyCartitem: ShoppingcartItem;
 
 	constructor(
 		private productService: ProductService,
@@ -73,6 +74,8 @@ export class ShoppingcartListComponent implements OnInit {
 		this.cartList = [];
 		this.getProducts();
 		this.getCarts();
+
+		this.emptyCartitem = {id: 0, quantity: 0, priceDollar: 0, totalDollar: 0};
 	}
 
 	cartlistOrdered(): Shoppingcart[] {
@@ -152,10 +155,6 @@ export class ShoppingcartListComponent implements OnInit {
 				this.cartSelected = cart;
 				this.getCarts();
 			});
-	}
-
-	getEmptyCartitem(): ShoppingcartItem {
-		return {} as ShoppingcartItem;
 	}
 
 	updateCarts(): void {

@@ -56,7 +56,9 @@
 				<h5 class="card-title">Add an item:</h5>
 			</div>
 			<div class="card-body">
-				<app-cartitem-add [cart]="cartSelected"  (saveItem)="addCartitem($event)"></app-cartitem-add>
+
+				<app-cartitem-edit [cart]="cartSelected" [cartitem]="emptyCartitem" (savedShoppingcartItem)="addCartitem($event)"></app-cartitem-edit>
+
 			</div>
 		</div>
 		</div>
