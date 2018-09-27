@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+// add animations:
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -16,6 +18,7 @@ import { MessageService } from './message.service';
 	],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		AppRoutingModule,
 		ShoppingcartModule,
 		CoreModule

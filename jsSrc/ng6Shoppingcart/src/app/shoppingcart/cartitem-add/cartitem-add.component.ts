@@ -1,46 +1,31 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Shoppingcart, ShoppingcartItem } from '../../core/shoppingcart.interface';
 import { ProductService } from '../../core/product.service';
 import { Product } from '../../core/product.interface';
 
 @Component({
-	selector: 'app-cartitem-edit',
-	templateUrl: './cartitem-edit.component.html',
-	styleUrls: ['./cartitem-edit.component.css']
+	selector: 'app-cartitem-add',
+	templateUrl: './cartitem-add.component.html'
 })
-export class CartitemEditComponent implements OnInit {
+export class CartitemAddComponent implements OnInit {
 	@Input() cart: Shoppingcart;
-	@Input() cartitem: ShoppingcartItem;
+	// @Input() cartitem: ShoppingcartItem;
+	cartitem: ShoppingcartItem;
 
-	@Output() savedShoppingcartItem = new EventEmitter<ShoppingcartItem>();
+	@Output() saveItem = new EventEmitter<ShoppingcartItem>();
 
-	isLoading = true;
 	productList: Product[];
-	originalAmount = 0;
-
+	isLoading = false;
 	constructor(private productService: ProductService) { }
-
-	get cartWorkingTotal(): number {
-		return this.cart.totalDollar - this.originalAmount + (this.cartitem.priceDollar * this.cartitem.quantity);
-	}
 
 	ngOnInit() {
 		this.isLoading = true;
-		this.originalAmount = this.cartitem.totalDollar;
+		this.cartitem = {} as ShoppingcartItem;
 		this.productService.getProductsCached()
 			.subscribe( products => {
 				this.productList = products;
 				this.isLoading = false;
 			});
-	}
-
-	save() {
-		console.log('save() in cartitem-edit');
-		this.isLoading = true;
-		this.savedShoppingcartItem.emit(this.cartitem);
-		this.cartitem = {} as ShoppingcartItem;
-		this.isLoading = false;
-		console.log('done with save() in cartitem-edit');
 	}
 
 	populateProduct() {
@@ -60,5 +45,13 @@ export class CartitemEditComponent implements OnInit {
 			this.cartitem.priceDollar = 0;
 			this.cartitem.productName = '';
 		}
+	}
+
+	save() {
+		console.log('save() in cartitem-edit');
+		this.isLoading = true;
+		this.saveItem.emit(this.cartitem);
+		this.cartitem = {} as ShoppingcartItem;
+		this.isLoading = false;
 	}
 }

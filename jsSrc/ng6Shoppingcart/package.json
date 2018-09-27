@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json --progress --open",
+    "start": "ng serve --proxy-config proxy.config.json --progress --open --port 4201",
     "build": "ng build",
     "build-prod": "ng build --prod",
     "build-dev": "ng build -dev --base-href /mvc/assets/dist/prodcat/prodcat.htm",

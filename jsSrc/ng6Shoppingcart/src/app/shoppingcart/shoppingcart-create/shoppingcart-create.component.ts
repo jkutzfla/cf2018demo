@@ -26,7 +26,7 @@ export class ShoppingcartCreateComponent implements OnInit {
 	}
 
 	private newCartObject(): Shoppingcart {
-		const sc: Shoppingcart = {id: 0, items: [], name: '', totalDollar: 0};
+		const sc: Shoppingcart = {id: 0, items: [], name: '', totalDollar: 0, dateCreated: new Date(), dateModified: new Date()};
 		return sc;
 	}
 

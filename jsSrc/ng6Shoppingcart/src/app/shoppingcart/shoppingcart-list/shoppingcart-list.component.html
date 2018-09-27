@@ -1,3 +1,11 @@
+<div>
+	<button (click)="updateCarts()">Update Carts</button>
+</div>
+<button (click)="toggle()">Toggle</button>
+<div [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
+	The box is now {{ isOpen ? 'Open' : 'Closed' }}!
+</div>
+
 <div class="row" style="padding: 10px; line-height: 28px;">
 	<div class="col-8">
 		<span *ngIf="cartList.length == 0">No Carts Found</span>
@@ -19,6 +27,7 @@
 			style="display: block; padding: 5px;"
 			[ngClass]="{rowSelected: cartSelected && cart.id == cartSelected.id}">
 			<app-shoppingcart-display [cart]="cart" [cartname]="cart.name"></app-shoppingcart-display>
+				<!-- <span *ngFor="let d of cart.totalDollar">{{d | currency}}</span>-->
 			<span>
 					<button (click)="select(cart)" class="btn btn-primary">SELECT</button>
 					<button (click)="delete(cart)" class="btn btn-danger">DELETE</button>
@@ -27,16 +36,37 @@
 	</ul>
 </div>
 
-<div *ngIf="cartSelected" style="padding: 10px;">
-	<app-shoppingcart-detail [cart]="cartSelected"></app-shoppingcart-detail>
-	<!-- edit form used to create new item: -->
-	<div style="padding: 10px;">
-	Add an item:
-	<app-cartitem-edit [cart]="cartSelected"  (saveItem)="addCartitem($event)"></app-cartitem-edit>
+<!--<div [@openClose]="isACartSelected ? 'open' : 'closed'" class="open-close-container">
+	openClose this is based on cartSelected.</div>
+
+<div [@popOverState]="isACartSelected ? 'show' : 'hide'" class="open-close-container">
+	popOverState this is based on cartSelected.</div> -->
+
+<div [@popOverState]="isACartSelected ? 'show' : 'hide'" class="open-close-container">
+	<div *ngIf="!cartSelected" style="padding:10px;">
+		<h3>Select a cart</h3>
 	</div>
-	<div><button (click)="cartSelected = null" class="btn btn-default">Close {{cartSelected.name}} cart</button></div>
+	<div *ngIf="cartSelected" style="padding: 10px;">
+		<!-- <div [@popOverState]="isACartSelected ? 'show' : 'hide'" class="fred">fade in here.</div> -->
+		<app-shoppingcart-detail [cart]="cartSelected" (updatedItem)="updateCartitem($event)" ></app-shoppingcart-detail>
+		<!-- edit form used to create new item: -->
+		<div style="padding-left: 10px; padding-right: 10px;">
+		 <div class="card panel-default">
+			<div class="card-header">
+				<h5 class="card-title">Add an item:</h5>
+			</div>
+			<div class="card-body">
+				<app-cartitem-add [cart]="cartSelected"  (saveItem)="addCartitem($event)"></app-cartitem-add>
+			</div>
+		</div>
+		</div>
+		<div><button (click)="cartSelected = null" class="btn btn-default">Close {{cartSelected.name}} cart</button></div>
+	</div>
 </div>
 
 <div style="padding-top: 20px;">
 <app-shoppingcart-create (add)="onCreateCart($event)"></app-shoppingcart-create>
+</div>
+
+<div style="padding:40px;">
 </div>

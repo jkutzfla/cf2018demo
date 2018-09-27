@@ -19,6 +19,9 @@ export class ShoppingcartService {
 			this.handleError = httpErrorHandler.createHandleError('ShoppingcartService');
 		}
 
+	// in shoppingcart.service.ts
+	// create an Observable of an array of Shoppingcart
+	// to be subscribe()'ed in a component.
 	getCartlist(): Observable<Shoppingcart[]> {
 		const apiUrl = this.apiUrl + '/list';
 		return this.http.get<Shoppingcart[]>(apiUrl);
@@ -33,10 +36,11 @@ export class ShoppingcartService {
 			);
 	}
 
+	// do HTTP GET /api/cart/{cartId}
 	getCart(cartid: Number): Observable<Shoppingcart> {
 		return this.http.get<any>(this.apiUrl + '/' + cartid)
 			.pipe(
-				map(response => response.cart),
+				map(response => response.cart as Shoppingcart),
 				tap(
 					(cart) => { if (!cart.items) { cart.items = [];	} }
 				)
@@ -49,6 +53,14 @@ export class ShoppingcartService {
 
 	addCartitem(cartid: Number, cartitem: ShoppingcartItem): Observable<Shoppingcart> {
 		const url = this.apiUrl + '/' + cartid + '/additem';
+		return this.http.post<any>(url, {item: cartitem})
+			.pipe(
+				map(response => response.cart)
+			);
+	}
+
+	updateCartItem(itemid: Number, cartitem: ShoppingcartItem): Observable<Shoppingcart> {
+		const url = this.apiUrl + '/' + itemid + '/updateitem';
 		return this.http.post<any>(url, {item: cartitem})
 			.pipe(
 				map(response => response.cart)

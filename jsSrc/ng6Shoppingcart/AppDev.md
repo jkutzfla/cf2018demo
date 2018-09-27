@@ -19,6 +19,7 @@ ng generate component shoppingcart/shoppingcart-display -m shoppingcart
 ng generate component shoppingcart/shoppingcart-create -m shoppingcart
 ng generate component shoppingcart/shoppingcart-detail -m shoppingcart
 ng generate component shoppingcart/cartitem-edit -m shoppingcart
+ng generate component shoppingcart/cartitem-add -m shoppingcart
 
 ng generate service core/product -m core
 ng generate service core/shoppingcart -m core
