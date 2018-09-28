@@ -7,7 +7,7 @@ import { Shoppingcart, ShoppingcartItem } from './shoppingcart.interface';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 
 const httpOptions = {headers: new HttpHeaders({'Content-Type':  'application/json'  })};
-
+// @Injectable decorator creates a Service.  providedIn: 'root' ensures Singleton.
 @Injectable({	providedIn: 'root' })
 export class ShoppingcartService {
 	private apiUrl = '/api/cart';
