@@ -1,3 +1,5 @@
+// shoppingcart-create.component.js
+// passes an event up
 angular.module('app').component('shoppingcartCreate', {
 	bindings: {
 		onCreate: '&'
@@ -7,6 +9,7 @@ angular.module('app').component('shoppingcartCreate', {
 		this.isLoading = false;
 		this.name="";
 
+		// when the create button is clicked:
 		this.create = function() {
 			console.log('create() in shoppingcart-create');
 			this.isLoading = true;

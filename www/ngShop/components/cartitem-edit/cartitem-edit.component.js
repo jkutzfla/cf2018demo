@@ -22,9 +22,9 @@ angular.module('app').component('cartitemEdit', {
 					return p.id == pid;
 				});
 				this.item.productName = product.name;
-				this.item.price = product.priceDollar;
+				this.item.priceDollar = product.priceDollar;
 			} else {
-				this.item.price = 0;
+				this.item.priceDollar = 0;
 			}
 		}
 
@@ -43,7 +43,7 @@ angular.module('app').component('cartitemEdit', {
 			}
 			var temp = 0;
 			if (this.item.quantity > 0) {
-				temp = this.item.quantity * this.item.price;
+				temp = this.item.quantity * this.item.priceDollar;
 			}
 			return current + temp;
 		}

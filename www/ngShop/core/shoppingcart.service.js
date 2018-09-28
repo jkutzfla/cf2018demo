@@ -4,10 +4,14 @@ angular.module('app').factory('Shoppingcart', ['$http', function($http) {
 	var service = {
 		cartlist: [],
 		cart: {},
+
+		// in shoppingcart.service.js
+		// will return a promise from the $http.get()
 		getList: function() {
 			var url = "/api/cart/list";
 			//$http was injected:
 			return $http.get(url).then(function (response) {
+				// store the result in the object:
 				service.cartlist = response.data;
 			});
 		},
@@ -56,7 +60,7 @@ angular.module('app').factory('Shoppingcart', ['$http', function($http) {
 
 		//this should go elsewhere.
 		newEmptyItem: function() {
-			return {quantity: 0, price: 0, productName: '', productId: 0 };
+			return {quantity: 0, priceDollar: 0, productName: '', productId: 0 };
 		}
 	};
 
