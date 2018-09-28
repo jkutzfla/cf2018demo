@@ -1,3 +1,4 @@
+// shoppingcart-detail.component.ts
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Shoppingcart, ShoppingcartItem } from '../../core/shoppingcart.interface';
 

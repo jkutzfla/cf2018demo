@@ -1,3 +1,4 @@
+// shoppingcart-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../core/product.service';
 import { ShoppingcartService } from '../../core/shoppingcart.service';
