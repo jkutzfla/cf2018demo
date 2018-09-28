@@ -10,6 +10,7 @@ import { ShoppingcartDisplayComponent } from './shoppingcart-display/shoppingcar
 import { ShoppingcartCreateComponent } from './shoppingcart-create/shoppingcart-create.component';
 import { ShoppingcartDetailComponent } from './shoppingcart-detail/shoppingcart-detail.component';
 import { CartitemEditComponent } from './cartitem-edit/cartitem-edit.component';
+import { ShoppingcartUpdaterComponent } from './shoppingcart-updater/shoppingcart-updater.component';
 
 @NgModule({
 	imports: [
@@ -17,6 +18,7 @@ import { CartitemEditComponent } from './cartitem-edit/cartitem-edit.component';
 	],
 	declarations: [
 		ShoppingcartListComponent, ShoppingcartDisplayComponent, ShoppingcartCreateComponent, ShoppingcartDetailComponent
+		, ShoppingcartUpdaterComponent
 		, CartitemEditComponent],
 	exports: [ShoppingcartListComponent]
 })

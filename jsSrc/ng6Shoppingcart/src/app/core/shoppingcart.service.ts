@@ -66,4 +66,13 @@ export class ShoppingcartService {
 				map(response => response.cart)
 			);
 	}
+
+	getLastUpdate(checkDate: Date): Observable<Date> {
+		const url = this.apiUrl + '/lastUpdate?checkDate=' + checkDate.toJSON();
+		return this.http.get<any>(url)
+			.pipe(
+				map(response => response.lastUpdate),
+				map( lastUpdate => new Date(lastUpdate))
+			);
+	}
 }

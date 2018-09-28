@@ -1,0 +1,14 @@
+<div class="updater">
+	Updater.
+	<span *ngIf="updatesAvailable">
+		<button (click)="getUpdates()" class="btn btn-default">Updates Available</button>
+	</span>
+	<span>
+		<button (click)="toggleTimer()" class="btn btn-outline-secondary">
+			<span *ngIf="doUpdates">Stop</span>
+			<span *ngIf="!doUpdates">Start</span>
+			Timer
+		</button>
+	</span>
+	<br>Last Updated: {{updatedAt }}
+</div>
