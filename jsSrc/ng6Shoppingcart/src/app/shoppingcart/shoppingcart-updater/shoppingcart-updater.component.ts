@@ -1,12 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ShoppingcartService } from '../../core/shoppingcart.service';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-shoppingcart-updater',
 	templateUrl: './shoppingcart-updater.html'
 })
-export class ShoppingcartUpdaterComponent implements OnInit {
+
+export class ShoppingcartUpdaterComponent implements OnInit, OnDestroy {
 	@Output() foundUpdates = new EventEmitter<Boolean>();
 
 	updatedAt: Date;
@@ -14,6 +15,7 @@ export class ShoppingcartUpdaterComponent implements OnInit {
 	doUpdates: Boolean;
 
 	secondsCounter = interval(3000);
+	subscription: Subscription;
 
 	constructor(
 		private shoppingcartService: ShoppingcartService,
@@ -23,23 +25,33 @@ export class ShoppingcartUpdaterComponent implements OnInit {
 		this.updatesAvailable = false;
 		this.doUpdates = true;
 		console.log('ngOnInit in updater');
+		this.startTimer();
+	}
 
-		this.secondsCounter.subscribe(n => {
+	startTimer() {
+		this.subscription = this.secondsCounter.subscribe(n => {
 			console.log(`It's been ${n} intervals since subscribing!`);
-			if (this.doUpdates) {
-				this.shoppingcartService.getLastUpdate(this.updatedAt)
-					.subscribe( lastUpdate => {
-						console.log('after check the lastUpdate, received: ', lastUpdate);
-						if (lastUpdate > this.updatedAt) {
-							this.updatesAvailable = true;
-						}
-				});
-			}
+			this.shoppingcartService.getLastUpdate(this.updatedAt)
+				.subscribe( lastUpdate => {
+					console.log('after check the lastUpdate, received: ', lastUpdate);
+					if (lastUpdate > this.updatedAt) {
+						this.updatesAvailable = true;
+					}
+			});
 		});
+	}
+
+	stopTimer() {
+		this.subscription.unsubscribe();
 	}
 
 	toggleTimer() {
 		this.doUpdates = ! this.doUpdates;
+		if (!this.doUpdates) {
+			this.stopTimer();
+		} else {
+			this.startTimer();
+		}
 	}
 
 	getUpdates() {
@@ -48,7 +60,7 @@ export class ShoppingcartUpdaterComponent implements OnInit {
 		this.updatedAt = new Date();
 	}
 
-	ngOndestroy() {
-		// this.secondsCounter.unsubscribe();
+	ngOnDestroy() {
+		this.stopTimer();
 	}
 }
