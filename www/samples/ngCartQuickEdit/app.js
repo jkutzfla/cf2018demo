@@ -1,7 +1,7 @@
 angular.module('app', []);
 
 angular.module('app').component('shoppingCart', {
-	templateUrl: '/ngCart/shoppingcart.html',
+	templateUrl: 'shoppingcart.html',
 	controller: function() {
 		this.item = null;
 		this.items = [

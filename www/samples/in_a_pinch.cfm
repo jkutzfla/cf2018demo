@@ -8,7 +8,8 @@
 		"price" = 99.99,
 		"quantity"=1,
 		"isDiscounted" = false,
-		"date" = [2018, 12, 31]
+		"dateArray" = [2018, 12, 31],
+		"now" = now()
 	};
 	//The datatype values are string, numeric, integer, boolean, date, array, and struct.
 	metadata = {firstname: {type:"string"}, upc: {type: "numeric"}};
@@ -22,11 +23,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
 	<script>
 	angular.module('app', []);
-/*	angular.module('app').component('InAPinch', {
-		bindings: {testdata: '<'},
-		template: '<p>Your data is: {{$ctrl.testdata | json}}</p>',
-		controller: function() {}
-	}); */
+
 	</script>
 	<script>
 		angular.module('app').component('inAPinch', {
@@ -40,6 +37,21 @@
 				}
 			}
 		});
+
+		angular.module('app').component('inAPinchEdit', {
+			bindings: { textIn: '<'},
+			template: '<p>Edit the data: <br>Customer Name:<br> ({{$ctrl.textIn.customerName}})<br> \
+				<input ng-model="$ctrl.textIn.customerName">\
+				<br>Price: {{$ctrl.textIn.price | currency}} <br>\
+				<input type="number" ng-model="$ctrl.textIn.price" step=".01"></p>\
+				<p><button ng-click="$ctrl.save()">Save</button></p>',
+			controller: function() {
+				this.save = function() {
+					alert("Saving " + this.textIn.customerName + " at a price of "+ this.textIn.price);
+				}
+			}
+		})
+
 		</script>
 		</head>
 	<body>
@@ -47,6 +59,8 @@
 		<h2>with serializeJSON()</h2>
 		<div ng-app="app">
 		<in-a-pinch text-in='<cfoutput>#Replace(serializeJSON(cfData), "'", " ", "all")#</cfoutput>' my-fred="myfred"></in-a-pinch>
+
+		<in-a-pinch-edit text-in='<cfoutput>#Replace(serializeJSON(cfData), "'", " ", "all")#</cfoutput>'></in-a-pinch-edit>
 		</div>
 	</body>
 </html>

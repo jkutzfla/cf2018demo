@@ -1,0 +1,83 @@
+<script>
+	// initialize a boolean flag
+	var showOOSMessage = false;
+
+	// know when the user clicks the button, and set the flag to true
+	oosButton.click() { 
+		showOOSMessage = true;
+	}
+</script>
+
+<html>
+	<!-- know when the flag is true, and then display the html -->
+	<div if (showOOSMessage)>
+		<p>To sign up for notifications, click below...</p>
+	</div>
+</html>
+
+<html>
+	<body>
+		<h1>Title</h1>
+		<my-component my-parameter=“Josh”></my-component>
+	</body>
+</html>
+<!-- Angular.js Template Language: -->
+<div ng-init="showContentFlag = false">
+	<button ng-click="showContentFlag = ! showContentFlag">Click to toggle</button>
+	<div ng-if="showContentFlag">Content appears when true.
+</div>
+		
+
+
+<!-- index.html -->
+<html>
+	<head>
+		<!-- include angular.min.js here -->
+		<script src="containers/shoppingcart-list/shoppingcart-list.component.js"></script>	
+	</head>
+	<body ng-app="app">
+		<shoppingcart-list>Loading...</shoppingcart-list>
+	</body>
+</html>
+
+
+<script>
+// angularJS Promise API:
+function then(successCallback, [errorCallback], [notifyCallback])
+function catch(errorCallback) 
+function finally(callback, notifyCallback)
+
+
+//used like:
+var self = this;
+$http.get('url').then(function(response) {
+	console.log('received response', response);
+	self.userid = response.data.userid;
+}).catch( function(error) {
+	console.log('received error: ', error);
+}).finally( function() {
+	console.log('finally runs regardless');
+});
+
+</script>
+
+<script>
+// my-component.component.js
+// add this to angular.module('app')
+.component('myComponent', {
+	...
+  controller: function() {
+		this.showContentFlag = false;
+		this.doSomething = function() {
+
+		}
+	},
+	bindings: {
+		variableIn: '<',
+		twoWayData: '=',
+		actionOut: '&',
+		stringIn: '@'
+	}
+});
+
+</script>
