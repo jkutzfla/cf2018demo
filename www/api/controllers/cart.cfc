@@ -1,3 +1,6 @@
+/**
+ * FW/1 API for Josh Kutz-Flamenbaum Angular Demo
+ */
 component accessors="true" {
 	property framework;
 	property CartService;
@@ -36,13 +39,35 @@ component accessors="true" {
 	function addItem(struct rc) {
 		var cart = variables.CartService.get(rc.id);
 		var item = rc.item;
-		var newitem = variables.CartService.addItem(cart, item.productId, item.productName, item.quantity, item.price);
-		var response = {item = item};
+		var newitem = variables.CartService.addItem(cart, item.productId, item.productName, item.quantity, item.priceDollar);
+		
+		// EntityReload will make sure the cart entity is updated to reflect new item & new total.
+		EntityReload(cart);
+		cart = variables.CartService.get(rc.id);
+		var response = {cart=cart};
+		variables.framework.renderData().data(response).type("json");
+	}
+
+	function updateItem(struct rc) {
+		var cartitem = variables.CartService.getItem(rc.id);
+		var item = rc.item;
+		variables.CartService.updateitem(cartitem.getId(), item.productId, item.productname, item.quantity, item.priceDollar);
+
+		var cart = cartitem.getCart();
+		EntityReload(cart);
+		cart = variables.CartService.get(cartitem.getCart().getId());
+		var response = {cart=cart};
 		variables.framework.renderData().data(response).type("json");
 	}
 
 	function removeItem(struct rc) {
 
+	}
+
+	function lastUpdate(struct rc) {
+		var lastUpdate = variables.CartService.getLastUpdate();
+		var response = {lastUpdate=lastUpdate};
+		variables.framework.renderData().data(response).type("json");
 	}
 
 

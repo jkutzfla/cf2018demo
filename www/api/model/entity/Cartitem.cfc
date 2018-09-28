@@ -12,4 +12,7 @@ component persistent="true" table="cartitems" {
 	property name="dateCreated" ormtype="timestamp" default="1900-01-01";
 	property name="dateModified" ormtype="timestamp" default="1900-01-01";
 
+	function getTotalDollar() {
+		return getQuantity() * getPriceDollar();
+	}
 }

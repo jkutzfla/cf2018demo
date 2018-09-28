@@ -9,7 +9,7 @@ component extends=framework.one {
 		diLocations = "./model/services", // ColdFusion ORM handles Beans
 		generateSES=false,
 		SESOmitIndex=true,
-		decodeRequestBody = true,
+		decodeRequestBody = true, // will convert the JSON from the HTTP body
 		preflightOptions=true, //this turns OPTIONS on, need to work on CORS
 		routes = new Routes().getRoutes()
 	};
@@ -71,7 +71,7 @@ component extends=framework.one {
 			request.customMethod = "";
 		}
 
-		sleep(200);
+		sleep(300);
 	}
 	public function onError( any exception, string event ) {
 		//writeLog(text="onError event=#event#, rc.action=#getFullyQualifiedAction('')#", file="FW1Error");
