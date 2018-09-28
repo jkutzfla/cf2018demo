@@ -1,2 +1,3 @@
 lib/*
 WEB-INF
+/node_modules
