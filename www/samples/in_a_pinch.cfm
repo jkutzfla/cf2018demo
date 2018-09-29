@@ -28,12 +28,15 @@
 	<script>
 		angular.module('app').component('inAPinch', {
 			bindings: { textIn: '<', myFred: '@' },
-			template: '<p>Your data is: <pre>{{$ctrl.textIn | json}}</pre>, fred= {{$ctrl.myFred}}</p>'
+			template: '<p>Your data is: <pre>{{$ctrl.textIn | json}}</pre>, fred= {{$ctrl.myFred}}</p>\
+			<p>The converted date for now() is: {{$ctrl.date | date:"yyyy-MM-dd HH:mm:ss Z"}}</p>'
 			, controller: function() {
 				this.dataIn = {};
 				this.$onInit = function() {
 					console.log(this.textIn);
 					this.dataIn = this.textIn;
+
+					this.date = new Date(this.textIn.now);
 				}
 			}
 		});
