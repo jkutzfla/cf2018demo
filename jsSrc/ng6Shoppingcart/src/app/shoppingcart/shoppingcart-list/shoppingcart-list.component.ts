@@ -41,10 +41,6 @@ export class ShoppingcartListComponent implements OnInit {
 
 	isOpen = false;
 
-	toggle() {
-		this.isOpen = !this.isOpen;
-	}
-
 	// property
 	get isACartSelected(): boolean {
 		return this.cartSelected ? true : false;
