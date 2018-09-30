@@ -1,5 +1,4 @@
-<div class="updater">
-	Updater.
+<div class="updater" class="">
 	<span *ngIf="updatesAvailable">
 		<button (click)="getUpdates()" class="btn btn-default">Updates Available</button>
 	</span>
@@ -10,5 +9,5 @@
 			Timer
 		</button>
 	</span>
-	<br>Last Updated: {{updatedAt }}
+	Last Updated: {{updatedAt |date }} {{updatedAt | date:'shortTime'}}
 </div>

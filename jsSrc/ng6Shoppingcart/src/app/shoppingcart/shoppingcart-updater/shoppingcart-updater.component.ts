@@ -23,9 +23,9 @@ export class ShoppingcartUpdaterComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.updatedAt = new Date();
 		this.updatesAvailable = false;
-		this.doUpdates = true;
+		this.doUpdates = false;
 		console.log('ngOnInit in updater');
-		this.startTimer();
+		// this.startTimer();
 	}
 
 	startTimer() {
