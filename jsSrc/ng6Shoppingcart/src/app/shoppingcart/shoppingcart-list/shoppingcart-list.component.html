@@ -1,13 +1,5 @@
 <app-shoppingcart-updater (foundUpdates)="updateCarts()" ></app-shoppingcart-updater>
 
-<div>
-	<button (click)="updateCarts()">Update Carts</button>
-</div>
-<button (click)="toggle()">Toggle</button>
-<div [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
-	The box is now {{ isOpen ? 'Open' : 'Closed' }}!
-</div>
-
 <div class="row" style="padding: 10px; line-height: 28px;">
 	<div class="col-8">
 		<span *ngIf="cartList.length == 0">No Carts Found</span>
@@ -73,4 +65,8 @@
 </div>
 
 <div style="padding:40px;">
+</div>
+
+<div>Debug:
+	<button (click)="updateCarts()">Update Carts</button>
 </div>

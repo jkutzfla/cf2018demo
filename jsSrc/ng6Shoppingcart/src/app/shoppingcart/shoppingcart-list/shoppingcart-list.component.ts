@@ -9,9 +9,7 @@ import {
 	state,
 	style,
 	animate,
-	transition,
-	query,
-	stagger
+	transition
 } from '@angular/animations';
 
 @Component({
@@ -19,24 +17,6 @@ import {
 	templateUrl: './shoppingcart-list.component.html',
 	styleUrls: ['./shoppingcart-list.component.css'],
 	animations: [
-		trigger('openClose', [
-			state('open', style({
-				height: '100px',
-				opacity: 1,
-				backgroundColor: 'yellow'
-			})),
-			state('closed', style({
-				height: '0px',
-				opacity: 0.5,
-				backgroundColor: 'green'
-			})),
-			transition('open => closed', [
-				animate('1s')
-			]),
-			transition('closed => open', [
-				animate('0.5s')
-			]),
-		]),
 		trigger('popOverState', [
 			state('show', style({
 				opacity: 1
