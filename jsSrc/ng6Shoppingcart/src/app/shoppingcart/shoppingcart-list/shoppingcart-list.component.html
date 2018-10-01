@@ -12,8 +12,8 @@
 <div *ngIf="cartList.length > 0">
 	<ul style="margin: 0px;">
 		<li style="display: block;">
-			<span style="display: table-cell; width: 5em;">Id</span>
-			<span style="display: table-cell; width: 15em;">Name</span>
+			<span style="display: table-cell; width: 5em; font-weight: bold;" (click)="sortBy='id'">Id</span>
+			<span style="display: table-cell; width: 15em; font-weight: bold;" (click)="sortBy='name'">Name</span>
 			<span style="display: table-cell; width: 5em;">Total</span>
 			<span style="display: table-cell; width: 10em;"></span>
 		</li>

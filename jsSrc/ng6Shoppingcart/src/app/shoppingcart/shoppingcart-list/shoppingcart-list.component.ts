@@ -11,6 +11,7 @@ import {
 	animate,
 	transition
 } from '@angular/animations';
+import { forkJoin } from 'rxjs';
 
 @Component({
 	selector: 'app-shoppingcart-list',
@@ -34,6 +35,8 @@ export class ShoppingcartListComponent implements OnInit {
 	cartList: Shoppingcart[];
 	cartSelected: Shoppingcart;
 	emptyCartitem: ShoppingcartItem;
+	sortBy = 'id';
+	sortDirection = 'asc';
 
 	constructor(
 		private productService: ProductService,
@@ -49,15 +52,33 @@ export class ShoppingcartListComponent implements OnInit {
 	ngOnInit() {
 		this.isLoading = true;
 		this.cartList = [];
-		this.getProducts();
-		this.getCarts();
+		const products = this.productService.getProductsCached();
+		const carts = this.shoppingCartService.getCartlist();
+		// when starting up, dont show the page until all required network resources are loaded.
+		// forkJoin is the Promise.all for rxjs.
+		forkJoin( [products, carts] ).subscribe( results => {
+			// results[0] is products,
+			// results[1] is carts.
+			this.cartList = results[1];
+			this.isLoading = false;
+		});
 
 		this.emptyCartitem = {id: 0, quantity: 0, priceDollar: 0, totalDollar: 0};
 	}
 
 	cartlistOrdered(): Shoppingcart[] {
-		const sorted =  this.cartList.sort( function (a, b) {
-			return a.id - b.id;
+		const sorted =  this.cartList.sort( (a, b) => {
+			if (this.sortDirection === 'desc') {
+				const temp = b;
+				b = a;
+				a = temp;
+			}
+
+			if (this.sortBy === 'name') {
+				return a.name.localeCompare(b.name);
+			} else {
+				return a.id - b.id;
+			}
 		});
 		return sorted;
 	}
