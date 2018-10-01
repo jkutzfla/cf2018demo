@@ -12,4 +12,18 @@
 		<from>^/api/(.*)$</from>
 		<to type="passthrough" last="true">/api/index.cfm/$1</to>
 	</rule>
+
+	<rule>
+		<name>Angular6 Dev route protection</name>
+		<condition type="request-uri" operator="notequal">^/ng6Shop/DEV/index.html$</condition>
+		<from>^/ng6Shop/DEV/index.html(.*)$</from>
+		<to type="passthrough" last="true">/ng6Shop/DEV/index.html</to>
+	</rule>
+
+	<rule>
+		<name>Angular6 route protection</name>
+		<condition type="request-uri" operator="notequal">^/ng6Shop/index.html$</condition>
+		<from>^/ng6Shop/index.html/(.*)$</from>
+		<to type="passthrough" last="true">/ng6Shop/index.html</to>
+	</rule>
 </urlrewrite>
