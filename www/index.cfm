@@ -19,7 +19,8 @@
 	<li><a href="/ngShop/" target="_blank">Angular.js - Shopping Cart demo</a></li>
 
 	<li><a href="http://localhost:4201/" target="_blank">Angular v6 - Shopping Cart Demo - DEV</a></li>
-	<li><a href="/ng6Shop/index.html" target="_blank">Angular v6 - Shopping Cart Demo - PRODUCTION</a></li>
+	<li><a href="/ng6Shop/index.html" target="_blank">Angular v6 - Shopping Cart Demo - PRODUCTION Build</a></li>
+	<li><a href="/ng6Shop/DEV/index.html" target="_blank">Angular v6 - Shopping Cart Demo - DEV Build</a></li>
 	</ul>
 </div>
 
