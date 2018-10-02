@@ -1,7 +1,7 @@
 // shoppingcart.interface.ts
 export interface Shoppingcart {
 	id: number;
-	name: String;
+	name: string;
 	totalDollar?: number;
 	totalPoint?: number;
 	items?: ShoppingcartItem[];

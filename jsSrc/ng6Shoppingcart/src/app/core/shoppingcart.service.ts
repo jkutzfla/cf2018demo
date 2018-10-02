@@ -14,10 +14,11 @@ export class ShoppingcartService {
 	private handleError: HandleError;
 
 	constructor(
-		private http: HttpClient,
-		httpErrorHandler: HttpErrorHandler) {
-			this.handleError = httpErrorHandler.createHandleError('ShoppingcartService');
-		}
+		private http: HttpClient
+		/* httpErrorHandler: HttpErrorHandler */) {}
+		/* {
+			this.handleError = httpErrorHandler.createHandleError('ShoppingcartService'); } */
+
 
 	// in shoppingcart.service.ts
 	// create an Observable of an array of Shoppingcart
@@ -32,7 +33,7 @@ export class ShoppingcartService {
 		return this.http.post<any>(this.apiUrl, payload, httpOptions)
 			.pipe(
 				map(response => response.cart), // the response has a root cart key.
-				catchError( this.handleError('createCart', newCart) )
+				// catchError( this.handleError('createCart', newCart) )
 			);
 	}
 
