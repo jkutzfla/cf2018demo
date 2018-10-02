@@ -1,13 +1,13 @@
 import { ShoppingcartModule } from './shoppingcart.module';
 
 describe('ShoppingcartModule', () => {
-  let shoppingcartModule: ShoppingcartModule;
+	let shoppingcartModule: ShoppingcartModule;
 
-  beforeEach(() => {
-    shoppingcartModule = new ShoppingcartModule();
-  });
+	beforeEach(() => {
+		shoppingcartModule = new ShoppingcartModule();
+	});
 
-  it('should create an instance', () => {
-    expect(shoppingcartModule).toBeTruthy();
-  });
+	it('should create an instance', () => {
+		expect(shoppingcartModule).toBeTruthy();
+	});
 });
