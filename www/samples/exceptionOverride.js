@@ -1,3 +1,4 @@
+// File misc/exceptionOverride.js
 var mod = angular.module('exceptionOverride', []);
 mod.config(function ($provide) {
 	$provide.decorator("$exceptionHandler", ['$delegate', '$injector', function ($delegate, $injector) {

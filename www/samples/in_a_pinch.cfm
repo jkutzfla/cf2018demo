@@ -9,7 +9,8 @@
 		"quantity"=1,
 		"isDiscounted" = false,
 		"dateArray" = [2018, 12, 31],
-		"now" = now()
+		"now" = now(),
+		"TZ" = createObject('java', 'java.util.TimeZone').getDefault().getId()
 	};
 	//The datatype values are string, numeric, integer, boolean, date, array, and struct.
 	metadata = {firstname: {type:"string"}, upc: {type: "numeric"}};
@@ -20,7 +21,9 @@
 <html>
 	<head>
 	<title>In a Pinch</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+	<script src="angular-1.6.6.min.js"></script>
+	<!-- if not on conference wifi, use CDN: 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script> -->
 	<script>
 	angular.module('app', []);
 
@@ -29,14 +32,14 @@
 		angular.module('app').component('inAPinch', {
 			bindings: { textIn: '<', myFred: '@' },
 			template: '<p>Your data is: <pre>{{$ctrl.textIn | json}}</pre>, fred= {{$ctrl.myFred}}</p>\
-			<p>The converted date for now() is: {{$ctrl.date | date:"yyyy-MM-dd HH:mm:ss Z"}}</p>'
+			<p>The converted dateObject for now() is: {{$ctrl.dateObject | date:"longDate"}}, Time is {{$ctrl.dateObject | date:"HH:mm:ss Z"}}</p>'
 			, controller: function() {
 				this.dataIn = {};
 				this.$onInit = function() {
 					console.log(this.textIn);
 					this.dataIn = this.textIn;
 
-					this.date = new Date(this.textIn.now);
+					this.dateObject = new Date(this.textIn.now);
 				}
 			}
 		});
