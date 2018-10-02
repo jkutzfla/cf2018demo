@@ -103,6 +103,7 @@ export class ShoppingcartListComponent implements OnInit {
 	select(cart: Shoppingcart) {
 		this.isLoading = true;
 		this.cartSelected = null;
+		this.emptyCartitem = {id: 0, quantity: 0, priceDollar: 0, totalDollar: 0};
 		this.shoppingCartService.getCart(cart.id)
 			.subscribe( fullcart => {
 				this.cartSelected = fullcart;
