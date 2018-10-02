@@ -5,8 +5,11 @@
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json --progress --open --port 4201",
     "build": "ng build",
-    "build-prod": "ng build --prod",
-    "build-dev": "ng build -dev --base-href /mvc/assets/dist/prodcat/prodcat.htm",
+    "build-prod": "ng build --prod --base-href /ng6Shop/index.html",
+		"build-dev": "ng build --base-href /ng6Shop/DEV/index.html",
+		"copy-prod" : "mkdirp ../../www/ng6Shop && rimraf ../../www/ng6Shop/*.* && copyfiles -f dist/ng6Shoppingcart/* ../../www/ng6Shop/",
+		"copy-dev" : "mkdirp ../../www/ng6Shop/DEV && rimraf ../../www/ng6Shop/DEV/*.* && copyfiles -f dist/ng6Shoppingcart/* ../../www/ng6Shop/DEV/",
+		"go-live-dev" : "npm run build-dev && npm run copy-dev",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
