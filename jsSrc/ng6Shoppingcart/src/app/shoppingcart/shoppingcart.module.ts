@@ -12,6 +12,8 @@ import { ShoppingcartDetailComponent } from './shoppingcart-detail/shoppingcart-
 import { CartitemEditComponent } from './cartitem-edit/cartitem-edit.component';
 import { ShoppingcartUpdaterComponent } from './shoppingcart-updater/shoppingcart-updater.component';
 
+import { SpinnerComponent } from './../shared/spinner/spinner.component';
+
 @NgModule({
 	imports: [
 		CommonModule, HttpClientModule, FormsModule
@@ -19,7 +21,8 @@ import { ShoppingcartUpdaterComponent } from './shoppingcart-updater/shoppingcar
 	declarations: [
 		ShoppingcartListComponent, ShoppingcartDisplayComponent, ShoppingcartCreateComponent, ShoppingcartDetailComponent
 		, ShoppingcartUpdaterComponent
-		, CartitemEditComponent],
+		, CartitemEditComponent
+		, SpinnerComponent ],
 	exports: [ShoppingcartListComponent]
 })
 export class ShoppingcartModule { }

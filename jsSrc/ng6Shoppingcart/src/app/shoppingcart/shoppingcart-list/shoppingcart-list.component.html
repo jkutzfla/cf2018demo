@@ -1,12 +1,12 @@
 <app-shoppingcart-updater (foundUpdates)="updateCarts()" ></app-shoppingcart-updater>
 
 <div class="row" style="padding: 10px; line-height: 28px;">
-	<div class="col-8">
+	<div class="col-8" style="padding: 10px; line-height: 28px;">
 		<span *ngIf="cartList.length == 0">No Carts Found</span>
 		<span *ngIf="cartList.length > 0">Carts found: {{cartList.length}}</span>
-		<span *ngIf="isLoading">Loading...</span>
+		<span *ngIf="isLoading"> <app-spinner></app-spinner> </span>
 	</div>
-	<div class="col-4"></div>
+	<div class="col-4" style="padding: 10px; line-height: 28px;"></div>
 </div>
 
 <div *ngIf="cartList.length > 0">
